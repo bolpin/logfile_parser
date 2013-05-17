@@ -78,7 +78,7 @@ class Parser
     @file = File.new(filename, "r")
     @file.each do |line|
       begin
-        parse_line(line)
+        parse(line)
       rescue LineFormatError
         puts "Bad line: #{line}"
       end
@@ -87,7 +87,7 @@ class Parser
     _write_dates_file
   end
 
-  def parse_line(line)
+  def parse(line)
     timestamp, user, page = line.chomp.split("\t")
     raise LineFormatError if !user || !page
     if !@user_data[user]
